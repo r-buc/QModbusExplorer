@@ -7,7 +7,7 @@
 QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = QMobusExplorer
+TARGET = QModbusExplorer
 TEMPLATE = app
 
 SOURCES += src/main.cpp \
@@ -95,7 +95,6 @@ RESOURCES += \
     icons/icons.qrc \
     translations/translations.qrc
 RC_ICONS = explorer.ico
-
 
 
 

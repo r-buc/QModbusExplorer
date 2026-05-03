@@ -2,7 +2,7 @@ app-id: io.github.r_buc.QModbusExplorer
 runtime: org.kde.Platform
 runtime-version: "5.15-24.08"
 sdk: org.kde.Sdk
-command: QMobusExplorer
+command: QModbusExplorer
 finish-args:
   - --share=ipc
   - --share=network
@@ -18,7 +18,7 @@ modules:
     build-commands:
       - qmake qModbusExplorer.pro PREFIX=/app
       - make -j${FLATPAK_BUILDER_N_JOBS}
-      - install -Dm755 QMobusExplorer /app/bin/QMobusExplorer
+      - install -Dm755 QModbusExplorer /app/bin/QModbusExplorer
       - install -Dm644 flatpak/io.github.r_buc.QModbusExplorer.desktop /app/share/applications/io.github.r_buc.QModbusExplorer.desktop
       - install -Dm644 flatpak/io.github.r_buc.QModbusExplorer.metainfo.xml /app/share/metainfo/io.github.r_buc.QModbusExplorer.metainfo.xml
       - install -Dm644 icons/explorer.png /app/share/icons/hicolor/48x48/apps/io.github.r_buc.QModbusExplorer.png

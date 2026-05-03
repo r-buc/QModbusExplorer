@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=QModbusExplorer
 Comment=Explore Modbus RTU and TCP networks
-Exec=QMobusExplorer
+Exec=QModbusExplorer
 Icon=io.github.r_buc.QModbusExplorer
 Terminal=false
 Type=Application
