@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=QModbusExplorer
+Comment=Explore Modbus RTU and TCP networks
+Exec=QMobusExplorer
+Icon=io.github.r_buc.QModbusExplorer
+Terminal=false
+Type=Application
+Categories=Development;Network;Utility;
+Keywords=Modbus;TCP;RTU;Serial;
+StartupNotify=true

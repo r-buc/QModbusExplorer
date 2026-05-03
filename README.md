@@ -14,6 +14,10 @@
 4. Running
   For Windows a pre-compiled binary is availiable. It does not require instalation, just unzip and run. It is tested on Windows Server 2008 and Windows 10 systems. Feedback with compatibility information with other systems are welcome.
 
+5. Flatpak release workflow
+  A GitHub Actions workflow is included at `.github/workflows/flatpak-release.yml` to build a Flatpak bundle from `flatpak/io.github.r_buc.QModbusExplorer.yml`.
+  Push a `v*` tag to build the Flatpak bundle and publish a GitHub release, or use the workflow dispatch input to create a release manually.
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or

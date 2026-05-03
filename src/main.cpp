@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <QDir>
+#include <QStandardPaths>
 #include <QTranslator>
 
 #include "QsLog.h"
@@ -11,6 +12,23 @@
 #include "modbuscommsettings.h"
 
 QTranslator *Translator;
+
+namespace {
+
+QString ensureWritableLocation(QStandardPaths::StandardLocation location)
+{
+    QString path = QStandardPaths::writableLocation(location);
+
+    if (path.isEmpty())
+    {
+        path = QDir::homePath();
+    }
+
+    QDir().mkpath(path);
+    return path;
+}
+
+}
 
 int main(int argc, char *argv[])
 {
@@ -24,6 +42,7 @@ int main(int argc, char *argv[])
     //application startup
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication app(argc, argv);
+    QCoreApplication::setApplicationName("QModbusExplorer");
     Translator = new QTranslator;
     Translator->load(":/translations/" + QCoreApplication::applicationName() + "_" + QLocale::system().name());
     app.installTranslator(Translator);
@@ -31,7 +50,9 @@ int main(int argc, char *argv[])
     //init the logging mechanism
     QsLogging::Logger& logger = QsLogging::Logger::instance();
     logger.setLoggingLevel(QsLogging::OffLevel); // start with no logging
-    const QString sLogPath(QDir(app.applicationDirPath()).filePath("QModbusExplorer.log"));
+    const QString logDir = ensureWritableLocation(QStandardPaths::AppLocalDataLocation);
+    const QString configDir = ensureWritableLocation(QStandardPaths::AppConfigLocation);
+    const QString sLogPath(QDir(logDir).filePath("QModbusExplorer.log"));
     QsLogging::DestinationPtr fileDestination(QsLogging::DestinationFactory::MakeFileDestination(sLogPath,true,65535,7));
     QsLogging::DestinationPtr debugDestination(QsLogging::DestinationFactory::MakeDebugOutputDestination());
     logger.addDestination(debugDestination);
@@ -42,7 +63,7 @@ int main(int argc, char *argv[])
     //Modbus Adapter
     ModbusAdapter modbus_adapt(NULL);
     //Program settings
-    ModbusCommSettings settings("QModbusExplorer.ini");
+    ModbusCommSettings settings(QDir(configDir).filePath("QModbusExplorer.ini"));
 
     //show main window
     mainWin = new MainWindow(NULL, &modbus_adapt, &settings);

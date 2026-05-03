@@ -5,6 +5,9 @@
 #include <QTranslator>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QDir>
+#include <QFileInfo>
+#include <QStandardPaths>
 
 #include "QsLog.h"
 #include "mainwindow.h"
@@ -12,6 +15,42 @@
 #include "eutils.h"
 
 MainWindow *mainWin;
+
+namespace {
+
+QString logFilePath()
+{
+    QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+
+    if (path.isEmpty())
+    {
+        path = QDir::homePath();
+    }
+
+    QDir().mkpath(path);
+    return QDir(path).filePath("QModbusExplorer.log");
+}
+
+QString bundledDataPath(const QString &relativePath)
+{
+    const QDir appDir(QCoreApplication::applicationDirPath());
+    const QStringList candidates = {
+        appDir.filePath(relativePath),
+        QDir(appDir.filePath("../share/qmodbusexplorer")).filePath(relativePath)
+    };
+
+    foreach (const QString &candidate, candidates)
+    {
+        if (QFileInfo::exists(candidate))
+        {
+            return QDir::cleanPath(candidate);
+        }
+    }
+
+    return QDir::cleanPath(candidates.first());
+}
+
+}
 
 MainWindow::MainWindow(QWidget *parent, ModbusAdapter *adapter, ModbusCommSettings *settings) :
     QMainWindow(parent),ui(new Ui::MainWindow),  m_modbusCommSettings(settings), m_modbus(adapter)
@@ -505,7 +544,7 @@ void MainWindow::openLogFile()
     QString arg;
     QLOG_TRACE()<<  "Open log file";
 
-    arg = "file:///" + QCoreApplication::applicationDirPath() + "/QModbusExplorer.log";
+    arg = QUrl::fromLocalFile(logFilePath()).toString();
     QDesktopServices::openUrl(QUrl(arg));
 
 
@@ -518,7 +557,7 @@ void MainWindow::openModbusManual()
     QString arg;
     QLOG_TRACE()<<  "Open Modbus Manual";
 
-    arg = "file:///" + QCoreApplication::applicationDirPath() + "/ManModbus/index.html";
+    arg = QUrl::fromLocalFile(bundledDataPath("ManModbus/index.html")).toString();
     QDesktopServices::openUrl(QUrl(arg));
 
 
@@ -932,5 +971,4 @@ void MainWindow::showLogData(const QString &message, int level) {
    ui->lstLogView->setModel(&logStringListModel);
    ui->lstLogView->scrollToBottom();
 }
-
 

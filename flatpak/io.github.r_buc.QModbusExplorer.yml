@@ -1,0 +1,28 @@
+app-id: io.github.r_buc.QModbusExplorer
+runtime: org.kde.Platform
+runtime-version: "5.15-24.08"
+sdk: org.kde.Sdk
+command: QMobusExplorer
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  - --device=all
+build-options:
+  append-path: /usr/lib/sdk/qt5/bin
+modules:
+  - name: qmodbusexplorer
+    buildsystem: simple
+    build-commands:
+      - qmake qModbusExplorer.pro PREFIX=/app
+      - make -j${FLATPAK_BUILDER_N_JOBS}
+      - install -Dm755 QMobusExplorer /app/bin/QMobusExplorer
+      - install -Dm644 flatpak/io.github.r_buc.QModbusExplorer.desktop /app/share/applications/io.github.r_buc.QModbusExplorer.desktop
+      - install -Dm644 flatpak/io.github.r_buc.QModbusExplorer.metainfo.xml /app/share/metainfo/io.github.r_buc.QModbusExplorer.metainfo.xml
+      - install -Dm644 icons/explorer.png /app/share/icons/hicolor/48x48/apps/io.github.r_buc.QModbusExplorer.png
+      - cp -r ManModbus /app/share/qmodbusexplorer/
+    sources:
+      - type: dir
+        path: ../
