@@ -23,6 +23,10 @@
 #include "modbus.h"
 #include "modbus-private.h"
 
+/* Not part of libmodbus - added for QModbusExplorer */
+void busMonitorRawRequestData(uint8_t *data, int dataLen);
+void busMonitorRawResponseData(uint8_t *data, int dataLen);
+
 /* Internal use */
 #define MSG_LENGTH_UNDEFINED -1
 

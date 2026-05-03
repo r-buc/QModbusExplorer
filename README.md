@@ -9,10 +9,14 @@
   QModbusExplorer is based on [libmodbus 3.1.0-1](http://www.libmodbus.org) for modbus communication and on [QsLog](https://bitbucket.org/razvanpetru/qt-components/wiki/QsLog) for logging. Supports both Windows and Linux.
 
 3. Source code
-  Source code is availiable for Windows and Linux for compilation using [Qt](http://www.qt.io/download). Install Qt on your system, open QModbusExplorer project file (QModbusExplorer.pro) and compile. Qt library version 5.12.10  and Qt Creator version  was used.
+  Source code is available for Windows and Linux for compilation using [Qt](http://www.qt.io/download). Install Qt on your system, open QModbusExplorer project file (QModbusExplorer.pro) and compile. Qt library version 5.12.10  and Qt Creator version  was used.
 
 4. Running
-  For Windows a pre-compiled binary is availiable. It does not require instalation, just unzip and run. It is tested on Windows Server 2008 and Windows 10 systems. Feedback with compatibility information with other systems are welcome.
+  For Windows a pre-compiled binary is available. It does not require installation, just unzip and run. It is tested on Windows Server 2008 and Windows 10 systems. Feedback with compatibility information with other systems are welcome.
+
+5. Flatpak release workflow
+  A GitHub Actions workflow is included at `.github/workflows/flatpak-release.yml` to build a Flatpak bundle from `flatpak/io.github.r_buc.QModbusExplorer.yml`.
+  Push a `v*` tag to build the Flatpak bundle and publish a GitHub release, or use the workflow dispatch input to create a release manually.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

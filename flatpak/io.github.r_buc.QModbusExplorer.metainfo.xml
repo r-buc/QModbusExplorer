@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.r_buc.QModbusExplorer</id>
+  <name>QModbusExplorer</name>
+  <summary>Explore Modbus RTU and TCP networks</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <developer_name>r-buc</developer_name>
+  <launchable type="desktop-id">io.github.r_buc.QModbusExplorer.desktop</launchable>
+  <url type="homepage">https://github.com/r-buc/QModbusExplorer</url>
+  <url type="bugtracker">https://github.com/r-buc/QModbusExplorer/issues</url>
+  <description>
+    <p>QModbusExplorer is a Qt-based Modbus master application for exploring Modbus RTU and TCP devices.</p>
+    <p>It provides a graphical interface for reading and writing registers, monitoring bus traffic, and inspecting Modbus communication.</p>
+  </description>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="1.0.1" date="2022-04-11"/>
+  </releases>
+</component>

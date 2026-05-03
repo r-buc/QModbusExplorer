@@ -7,7 +7,7 @@
 QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = QMobusExplorer
+TARGET = QModbusExplorer
 TEMPLATE = app
 
 SOURCES += src/main.cpp \
@@ -76,7 +76,8 @@ win32:DEFINES += _TTY_WIN_  WINVER=0x0501
 
 win32:LIBS += -lsetupapi -lwsock32 -lws2_32
 
-QMAKE_CXXFLAGS += -std=gnu++11
+QMAKE_CXXFLAGS += -std=gnu++17
+CONFIG += c++17
 
 DEFINES += QS_LOG_LINE_NUMBERS     # automatically writes the file and line for each log message
 #DEFINES += QS_LOG_DISABLE         # logging code is replaced with a no-op
@@ -95,9 +96,6 @@ RESOURCES += \
     icons/icons.qrc \
     translations/translations.qrc
 RC_ICONS = explorer.ico
-
-
-
 
 
 
